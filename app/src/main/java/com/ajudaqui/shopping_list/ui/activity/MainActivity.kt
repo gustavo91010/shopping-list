@@ -11,12 +11,11 @@ import com.ajudaqui.shopping_list.modelo.Produto
 import com.ajudaqui.shopping_list.ui.recyclerview.adapter.ListaProdutosAdapter
 import java.math.BigDecimal
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInsaceState: Bundle?) {
         super.onCreate(savedInsaceState)
 
 // A classe R, é a classe que captura todos os idś que são gerados
-        setContentView(R.layout.activity_main)
         var recycleView = findViewById<RecyclerView>(R.id.recycleView)
         recycleView.adapter = ListaProdutosAdapter(
             context = this, produtos = listOf(
