@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.ajudaqui.shopping_list.R
+import com.ajudaqui.shopping_list.modelo.Produto
+import java.math.BigDecimal
 
 class FormularioProdutoActivity : AppCompatActivity(R.layout.activity_formulario_produto) {
 
@@ -17,10 +19,21 @@ class FormularioProdutoActivity : AppCompatActivity(R.layout.activity_formulario
 
         val botaoSalvar = findViewById<Button>(R.id.botao_salvar)
         botaoSalvar.setOnClickListener {
-            val nameField = findViewById<EditText>(R.id.nome)
-            val nome = nameField.text.toString()
-            Log.i("FormularioProduto", "onCreate: $nome")
-                    }
+            val nome = findViewById<EditText>(R.id.nome).text.toString()
+            val descricao = findViewById<EditText>(R.id.descricao).text.toString()
+            var valor = findViewById<EditText>(R.id.valor).text.toString()
+            if (valor.isBlank()) {
+                valor = "0"
+            }
+            val produto = Produto(
+                nome = nome,
+                descricao = descricao,
+                valor = BigDecimal(valor)
+            )
+
+            Log.i("FormularioProduto", "onCreate: $produto")
+
+        }
 
     }
 }
