@@ -12,9 +12,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListaProdutoActivty : AppCompatActivity(R.layout.activity_lista_produto) {
 
-    private val adapter= ListaProdutosAdapter(
+    private val adapter = ListaProdutosAdapter(
         context = this, produtos = ProdutosDAO().buscaTodos()
     )
+
     override fun onCreate(savedInsaceState: Bundle?) {
         super.onCreate(savedInsaceState)
         configura_reciclye_view()
@@ -24,7 +25,7 @@ class ListaProdutoActivty : AppCompatActivity(R.layout.activity_lista_produto) {
     // depois ve em qual parce do ciclo da vida do view isso se enquadra...
     override fun onResume() {
         super.onResume()
-adapter.atualiza_itens(ProdutosDAO().buscaTodos())
+        adapter.atualiza_itens(ProdutosDAO().buscaTodos())
 
         configura_fab()
     }

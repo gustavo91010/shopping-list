@@ -2,7 +2,6 @@ package com.ajudaqui.shopping_list.ui.activity
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -16,30 +15,35 @@ class FormularioProdutoActivity : AppCompatActivity(R.layout.activity_formulario
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        configurar_botao_salvar()
 
+    }
 
+    private fun configurar_botao_salvar() {
         val botaoSalvar = findViewById<Button>(R.id.botao_salvar)
+        val dao = ProdutosDAO()
+
         botaoSalvar.setOnClickListener {
-            val nome = findViewById<EditText>(R.id.nome).text.toString()
-            val descricao = findViewById<EditText>(R.id.descricao).text.toString()
-            var valor = findViewById<EditText>(R.id.valor).text.toString()
-            if (valor.isBlank()) {
-                valor = "0"
-            }
-            val produto = Produto(
-                nome = nome,
-                descricao = descricao,
-                valor = BigDecimal(valor)
-            )
+            val produto = criarProduto()
 
-            val produtoDao = ProdutosDAO()
-
-            produtoDao.adciona(produto)
-            Log.i("FormularioProduto", "tamanho: ${produtoDao.buscaTodos()?.size}")
-            Log.i("FormularioProduto", "onCreate: ${produtoDao.buscaTodos()}")
-            finish()
+            dao.adciona(produto)
+            finish()// volta para o inicio...
         }
+    }
 
+    private fun criarProduto(): Produto {
+        val nome = findViewById<EditText>(R.id.nome).text.toString()
+        val descricao = findViewById<EditText>(R.id.descricao).text.toString()
+        var valor = findViewById<EditText>(R.id.valor).text.toString()
+        if (valor.isBlank()) {
+            valor = "0"
+        }
+        val produto = Produto(
+            nome = nome,
+            descricao = descricao,
+            valor = BigDecimal(valor)
+        )
+        return produto
     }
 }
 
